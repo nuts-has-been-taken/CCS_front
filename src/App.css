@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.notification {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  transition: opacity 1s ease-in-out;
+  opacity: 1;
+}
+
+.notification.hidden {
+  opacity: 0;
+}
