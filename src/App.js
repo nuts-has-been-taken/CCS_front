@@ -3,6 +3,7 @@ import Rectangle from './Rectangle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRedo, faUpload } from '@fortawesome/free-solid-svg-icons';
 
+const backendURL = process.env.REACT_APP_BACKEND_URL;
 class App extends React.Component {
   constructor() {
     super();
@@ -18,7 +19,7 @@ class App extends React.Component {
   }
 
   handleReload = () => {
-    fetch('http://127.0.0.1:8080/download')
+    fetch(`${backendURL}/download`)
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data.data)) {
@@ -38,17 +39,15 @@ class App extends React.Component {
       const formData = new FormData();
       formData.append('file', selectedFile);
 
-      fetch('http://127.0.0.1:8080/upload', {
+      fetch(`${backendURL}/upload`, {
         method: 'POST',
         body: formData,
       })
         .then((response) => {
           if (response.ok) {
-            // 上传成功
             this.showNotification('上傳成功')
             console.log('上傳成功');
           } else {
-            // 上传失败
             this.showNotification('上傳失敗')
             console.error('上傳失敗');
           }
@@ -116,7 +115,7 @@ class App extends React.Component {
             height={50} 
             borderColor="black" 
             text={item} 
-            downloadUrl={`http://127.0.0.1:8080/download/${item}`} 
+            downloadUrl={`${backendURL}/download/${item}`} 
           />
         ))}
         </div>
